@@ -1,0 +1,6 @@
+{
+  "tipo": "logout",
+  "conteudo": {
+    "email": "nome_sobrenome@email.com"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "tipo": "login",
+  "conteudo": {
+    "email": "nome_sobrenome@email.com",
+    "senha": "senha_nome_sobrenome"
+  }
+}

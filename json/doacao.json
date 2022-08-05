@@ -1,0 +1,11 @@
+{
+  "tipo": "doacao",
+  "conteudo": {
+    "id_doador": 123,
+    "id_ong": 321,
+    "valor": 15.0,
+    "timestamp": "timestamp",
+    "metodo_pagamento": "PIX",
+    "status_pagamento": "Concluído"
+  }
+}
