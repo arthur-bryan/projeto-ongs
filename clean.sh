@@ -2,4 +2,4 @@
 
 rm database/*
 rm logs/*
-rm ../scripts/*.json
+rm scripts/*.json
