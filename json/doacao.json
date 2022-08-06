@@ -1,10 +1,9 @@
 {
   "tipo": "doacao",
   "conteudo": {
-    "id_doador": 123,
-    "id_ong": 321,
-    "valor": 15.0,
-    "timestamp": "timestamp",
+    "login_usuario": "login_usuario",
+    "nome_ong": "Nome ONG",
+    "valor": 7.50,
     "metodo_pagamento": "PIX",
     "status_pagamento": "Concluído"
   }

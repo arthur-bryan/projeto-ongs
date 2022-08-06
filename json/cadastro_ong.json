@@ -1,0 +1,14 @@
+{
+  "tipo": "cadastro_ong",
+  "conteudo": {
+    "nome": "Nome ONG",
+    "representante": "Representante ONG",
+    "email": "representante@ong.com.br",
+    "numero_contato_1": "(00) 00000-0000",
+    "numero_contato_2": "",
+    "endereco": "Rua da ONG",
+    "chave_pix": "ch4v3p1x0ng",
+    "total_doacoes": 0,
+    "total_valor_arrecadado": 0.0
+  }
+}
