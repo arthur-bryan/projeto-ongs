@@ -1,12 +1,12 @@
-from models.classes.database import Database
-from models.classes.log import Logger
-from config import config
+from app.models.classes.database import Database
+from app.models.classes.log import Logger
+from app.config import config
 
 
 class ControladorDatabase:
 
-    def __init__(self):
-        self.__database = Database(config.NOME_ARQUIVO_DATABASE)
+    def __init__(self, nome_arquivo_database):
+        self.__database = Database(nome_arquivo_database)
         self.__logger = Logger("DATABASE")
         self.__database.criar_tabela_usuarios()
         self.__database.criar_tabela_ongs()
@@ -145,3 +145,58 @@ class ControladorDatabase:
                     "mensagem": f"Doacao bem sucedida: De usuario com ID {id_usuario} para ONG com ID {id_ong}."
                 }
                 return self.__logger.log_message(mensagem=resultado)
+
+    def obter_usuarios_cadastrados(self):
+        resultado = self.__database.obter_usuarios_cadastrados()
+        usuarios = []
+        for usuario in resultado:
+            dados_usuario = {
+                "id": usuario[0],
+                "login_usuario": usuario[1],
+                "nome": usuario[2],
+                "sobrenome": usuario[3],
+                "email": usuario[4],
+                "senha": usuario[5],
+                "numero_telefone": usuario[6],
+                "endereco": usuario[7],
+                "total_doacoes": usuario[8],
+                "registrado_em": usuario[9]
+            }
+            usuarios.append(dados_usuario)
+        return usuarios
+    
+    def obter_ongs_cadastradas(self):
+        resultado = self.__database.obter_ongs_cadastradas()
+        ongs = []
+        for ong in resultado:
+            dados_ong = {
+                "id": ong[0],
+                "nome": ong[1],
+                "representante": ong[2],
+                "email": ong[3],
+                "numero_contato_1": ong[4],
+                "numero_contato_2": ong[5],
+                "endereco": ong[6],
+                "chave_pix": ong[7],
+                "total_doacoes": ong[8],
+                "total_valor_arrecadado": ong[9],
+                "regisrado_em": ong[10]
+            }
+            ongs.append(dados_ong)
+        return ongs
+
+    def obter_doacoes_realizadas(self):
+        resultado = self.__database.obter_doacoes_realizadas()
+        doacoes = []
+        for doacao in resultado:
+            dados_doacao = {
+                "id": doacao[0],
+                "id_usuario": doacao[1],
+                "id_ong": doacao[2],
+                "valor": doacao[3],
+                "metodo_pagamento": doacao[4],
+                "status_pagamento": doacao[5],
+                "data_hora": doacao[6]
+            }
+            doacoes.append(dados_doacao)
+        return doacoes

@@ -1,5 +1,6 @@
-from controllers.controlador_interface import ControladorInterface
-from controllers.controlador_database import ControladorDatabase
+from app.controllers.controlador_interface import ControladorInterface
+from app.controllers.controlador_database import ControladorDatabase
+from app.config import config
 import json
 
 
@@ -7,7 +8,7 @@ class WebSite:
 
     def __init__(self):
         self.__controlador_interface = ControladorInterface()
-        self.__controlador_database = ControladorDatabase()
+        self.__controlador_database = ControladorDatabase(config.NOME_ARQUIVO_DATABASE)
 
     def listener_requisicoes(self, requisicao_json):
         requisicao = json.loads(requisicao_json)

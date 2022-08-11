@@ -9,8 +9,8 @@ class ONG:
         self.numero_contato_2 = ""
         self.endereco = ""
         self.chave_pix = ""
-        self.total_doacoes = ""
-        self.total_valor_arrecadado = ""
+        self.total_doacoes = 0
+        self.total_valor_arrecadado = 0.0
         self.registrado_em = ""
 
     def json(self):

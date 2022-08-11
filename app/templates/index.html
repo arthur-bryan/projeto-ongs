@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ADMIN PAGE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ url_for('static', filename='css/index.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                {% block content %}
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-info alert-dimissible" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-12">
+                        <form method="post" action="cadastro-usuario">
+                            <div class="container">
+                                <h1>Registro Usuário</h1>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="nome"><b>Nome</b></label>
+                                        <input type="text" placeholder="Nome" name="nome" id="nome" required>
+                                    </div>
+                                    <div class="col-md">
+                                        <label for="sobrenome"><b>Sobrenome</b></label>
+                                        <input type="text" placeholder="Sobrenome" name="sobrenome" id="sobrenome" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="email"><b>Email</b></label>
+                                        <input type="text" placeholder="Email" name="email" id="email" required>
+                                    </div>
+                                    <div class="col-md">
+                                        <label for="login_usuario"><b>Nome Usuário</b></label>
+                                        <input type="text" placeholder="Nome Usuário" name="login_usuario" id="login_usuario" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="senha"><b>Senha</b></label>
+                                        <input type="text" placeholder="Senha" name="senha" id="senha" required>
+                                    </div>
+                                    <div class="col-md">
+                                        <label for="confirmacao_senha"><b>Repetir Senha</b></label>
+                                        <input type="text" placeholder="Repetir Senha" name="confirmacao_senha" id="confirmacao_senha" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <button type="submit" class="registerbtn">Registrar usuário</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <form method="post" action="cadastro-ong">
+                                <div class="container">
+                                    <h1>Registro ONG</h1>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="nome_ong"><b>Nome da ONG</b></label>
+                                            <input type="text" placeholder="Nome ONG" name="nome_ong" id="nome_ong" required>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="endereco"><b>Endereço</b></label>
+                                            <input type="text" placeholder="Endereço" name="endereco" id="endereco" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="representante"><b>Representante</b></label>
+                                            <input type="text" placeholder="Representante" name="representante" id="representante" required>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="email_ong"><b>Email</b></label>
+                                            <input type="text" placeholder="Email" name="email_ong" id="email_ong" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="numero_contato_1"><b>Número Contato 1</b></label>
+                                            <input type="text" placeholder="Numero Contato 1" name="numero_contato_1" id="numero_contato_1" required>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="chave_pix"><b>Chave PIX</b></label>
+                                            <input type="text" placeholder="Chave PIX" name="chave_pix" id="chave_pix" required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <button type="submit" class="registerbtn">Registrar ONG</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <form method="post" action="registro-doacao">
+                                <div class="container">
+                                    <h1>Realizar Doação</h1>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="login_usuario_ong"><b>Usuário</b></label>
+                                            <input type="text" placeholder="Usuário" name="login_usuario_ong" id="login_usuario_ong" required>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="doacao_nome_ong"><b>Nome da ONG</b></label>
+                                            <input type="text" placeholder="Nome da ONG" name="doacao_nome_ong" id="doacao_nome_ong" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="valor"><b>Valor</b></label>
+                                            <input type="text" placeholder="Valor" name="valor" id="valor" required>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="metodo_pagamento"><b>Método Pagamento</b></label>
+                                            <input type="text" placeholder="Método Pagamento" name="metodo_pagamento" id="metodo_pagamentoe" required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <button type="submit" class="registerbtn">Realizar Doação</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div style="overflow-x:auto;">
+                            <h1>Usuários cadastrados</h1>
+                            <hr>
+                            <table class="table table-bordered">
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Sobrenome</th>
+                                <th scope="col">Login</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Senha</th>
+                                <th scope="col">Total doações</th>
+                                <th scope="col">Registrado em</th>
+                              </tr>
+
+                                {% for usuario in usuarios %}
+                                    <tr>
+                                        <td>{{ usuario.id }}</td>
+                                        <td>{{ usuario.nome }}</td>
+                                        <td>{{ usuario.sobrenome }}</td>
+                                        <td>{{ usuario.login_usuario }}</td>
+                                        <td>{{ usuario.email }}</td>
+                                        <td>{{ usuario.senha }}</td>
+                                        <td>{{ usuario.total_doacoes }}</td>
+                                        <td>{{ usuario.registrado_em }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div style="overflow-x:auto;">
+                            <h1>ONGS cadastradas</h1>
+                            <hr>
+                            <table class="table table-bordered">
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Representante</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Chave PIX</th>
+                                <th scope="col">Qtde doações</th>
+                                <th scope="col">Total arrecadado</th>
+                              </tr>
+
+                                {% for ong in ongs %}
+                                    <tr>
+                                        <td>{{ ong.id }}</td>
+                                        <td>{{ ong.nome }}</td>
+                                        <td>{{ ong.representante }}</td>
+                                        <td>{{ ong.email }}</td>
+                                        <td>{{ ong.chave_pix }}</td>
+                                        <td>{{ ong.total_doacoes }}</td>
+                                        <td>R$ {{ ong.total_valor_arrecadado }}</td>
+                                        <td>{{ ong.registrado_em }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div style="overflow-x:auto;">
+                            <h1>Doações registradas</h1>
+                            <hr>
+                            <table class="table table-bordered">
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">ID Usuário</th>
+                                <th scope="col">ID ONG</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Método pagamento</th>
+                                <th scope="col">Data</th>
+                              </tr>
+
+                                {% for doacao in doacoes %}
+                                    <tr>
+                                        <td>{{ doacao.id }}</td>
+                                        <td>{{ doacao.id_usuario }}</td>
+                                        <td>{{ doacao.id_ong }}</td>
+                                        <td>R$ {{ doacao.valor }}</td>
+                                        <td>{{ doacao.metodo_pagamento }}</td>
+                                        <td>{{ doacao.data_hora }}</td>
+                                    </tr>
+                                {% endfor %}
+                              {% endblock %}
+                            </table>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</html>

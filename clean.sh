@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm database/*
-rm logs/*
+rm app/database/*
+rm app/logs/*
 rm scripts/*.json

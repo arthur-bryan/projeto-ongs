@@ -1,5 +1,4 @@
-from utils.utils import obter_data_atual
-import json
+from app.utils import utils
 import os
 
 
@@ -17,7 +16,7 @@ class Logger:
         texto = mensagem["mensagem"]
         codigo = mensagem["codigo"]
         status = mensagem["status"]
-        conteudo = f"{obter_data_atual()},{texto},{codigo},{status}\n"
+        conteudo = f"{utils.obter_data_atual()},{texto},{codigo},{status}\n"
         self.__arquivo_log.write(conteudo)
         self.__arquivo_log.close()
         return mensagem

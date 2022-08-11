@@ -1,4 +1,4 @@
-from config import config
+from app.config import config
 import sqlite3
 import os
 
@@ -6,10 +6,10 @@ import os
 class Database:
 
     def __init__(self, nome_arquivo_database):
-        self.__caminho = f"database"
+        self.__caminho = f"app/database"
         if not os.path.exists(self.__caminho):
             os.mkdir(self.__caminho)
-        self.__conector = sqlite3.connect(f"{self.__caminho}/{nome_arquivo_database}")
+        self.__conector = sqlite3.connect(f"{self.__caminho}/{nome_arquivo_database}", check_same_thread=False)
         self.__cursor = self.__conector.cursor()
 
     def criar_tabela_usuarios(self):
@@ -158,7 +158,7 @@ class Database:
         self.__cursor.execute(f"""
             UPDATE ongs
             SET total_doacoes = ?, total_valor_arrecadado = ?
-            WHERE id=?""", (total_doacoes+1, total_valor_arrecadado+valor, id_ong))
+            WHERE id=?""", (int(total_doacoes)+1, float(total_valor_arrecadado)+float(valor), id_ong))
         self.salvar_alteracoes()
 
     def obter_total_doacoes_ong(self, id_ong):
@@ -178,13 +178,28 @@ class Database:
         self.__cursor.execute(f"""
             UPDATE usuarios
             SET total_doacoes = ?
-            WHERE id=?""", (total_doacoes+1, id_usuario))
+            WHERE id=?""", (int(total_doacoes)+1, id_usuario))
         self.salvar_alteracoes()
 
     def obter_total_doacoes_usuario(self, id_usuario):
         self.__cursor.execute(f"""
             SELECT total_doacoes FROM usuarios
             WHERE id=?""", (id_usuario,))
+        return self.__cursor.fetchall()
+
+    def obter_usuarios_cadastrados(self):
+        self.__cursor.execute("""
+            SELECT * FROM usuarios;""")
+        return self.__cursor.fetchall()
+
+    def obter_ongs_cadastradas(self):
+        self.__cursor.execute("""
+            SELECT * FROM ongs;""")
+        return self.__cursor.fetchall()
+
+    def obter_doacoes_realizadas(self):
+        self.__cursor.execute("""
+            SELECT * FROM doacoes;""")
         return self.__cursor.fetchall()
 
     def executar_procedimento(self, sql_string, dados=None):

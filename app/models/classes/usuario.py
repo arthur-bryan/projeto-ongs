@@ -1,6 +1,3 @@
-# from models.classes.visitante import Visitante
-# from datetime import datetime
-
 
 class Usuario:
 
@@ -13,7 +10,7 @@ class Usuario:
         self.senha = ""
         self.numero_telefone = ""
         self.endereco = ""
-        self.total_doacoes = ""
+        self.total_doacoes = 0
         self.registrado_em = ""
 
     def json(self):

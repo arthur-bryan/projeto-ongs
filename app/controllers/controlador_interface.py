@@ -1,8 +1,8 @@
-from models.classes.ong import ONG
-from models.classes.usuario import Usuario
-from models.classes.doacao import Doacao
-from models.classes.log import Logger
-from utils.utils import obter_data_atual
+from app.utils import utils
+from app.models.classes.usuario import Usuario
+from app.models.classes.doacao import Doacao
+from app.models.classes.log import Logger
+from app.models.classes.ong import ONG
 import json
 
 
@@ -13,6 +13,7 @@ class ControladorInterface:
 
     @staticmethod
     def validar_senha_cadastro(dados_cadastro_json):
+        dados_cadastro_json = str(dados_cadastro_json).replace("'", '"')
         dados_json = json.loads(dados_cadastro_json)
         if dados_json["conteudo"]["senha"] == dados_json["conteudo"]["confirmacao_senha"]:
             return {
@@ -28,7 +29,7 @@ class ControladorInterface:
 
     @staticmethod
     def obter_dados_cadastro_usuario(requisicao_json):
-        requisicao = json.loads(requisicao_json)
+        requisicao = json.loads(str(requisicao_json).replace("'", '"'))
         usuario = Usuario()
         usuario.login_usuario = requisicao["conteudo"]["login_usuario"]
         usuario.nome = requisicao["conteudo"]["nome"]
@@ -37,43 +38,41 @@ class ControladorInterface:
         usuario.senha = requisicao["conteudo"]["senha"]
         usuario.numero_telefone = requisicao["conteudo"]["numero_telefone"]
         usuario.endereco = requisicao["conteudo"]["endereco"]
-        usuario.total_doacoes = requisicao["conteudo"]["total_doacoes"]
-        usuario.registrado_em = obter_data_atual()
+        usuario.registrado_em = utils.obter_data_atual()
         return usuario
     
     @staticmethod
     def obter_dados_cadastro_ong(requisicao_json):
-        requisicao = json.loads(requisicao_json)
+        print(requisicao_json)
+        requisicao = json.loads(str(requisicao_json).replace("'", '"'))
         ong = ONG()
-        ong.nome = requisicao["conteudo"]["nome"]
+        ong.nome = requisicao["conteudo"]["nome_ong"]
         ong.representante = requisicao["conteudo"]["representante"]
-        ong.email = requisicao["conteudo"]["email"]
+        ong.email = requisicao["conteudo"]["email_ong"]
         ong.numero_contato_1 = requisicao["conteudo"]["numero_contato_1"]
         ong.numero_contato_2 = requisicao["conteudo"]["numero_contato_2"]
         ong.endereco = requisicao["conteudo"]["endereco"]
         ong.chave_pix = requisicao["conteudo"]["chave_pix"]
-        ong.total_doacoes = requisicao["conteudo"]["total_doacoes"]
-        ong.total_valor_arrecadado = requisicao["conteudo"]["total_valor_arrecadado"]
-        ong.registrado_em = obter_data_atual()
+        ong.registrado_em = utils.obter_data_atual()
         return ong
 
     @staticmethod
     def obter_dados_login(requisicao_json):
-        requisicao = json.loads(requisicao_json)
+        requisicao = json.loads(str(requisicao_json).replace("'", '"'))
         login = requisicao["conteudo"]["login"]
         senha = requisicao["conteudo"]["senha"]
         return login, senha
 
     @staticmethod
     def obter_dados_doacao(requisicao_json):
+        requisicao = json.loads(str(requisicao_json).replace("'", '"'))
         doacao = Doacao()
-        requisicao = json.loads(requisicao_json)
-        doacao.login_usuario = requisicao["conteudo"]["login_usuario"]
+        doacao.login_usuario = requisicao["conteudo"]["login_usuario_ong"]
         doacao.nome_ong = requisicao["conteudo"]["nome_ong"]
         doacao.valor = requisicao["conteudo"]["valor"]
         doacao.metodo_pagamento = requisicao["conteudo"]["metodo_pagamento"]
-        doacao.status_pagamento = requisicao["conteudo"]["status_pagamento"]
-        doacao.data_hora = obter_data_atual()
+        doacao.status_pagamento = requisicao["conteudo"]["status_pagamento"] if "status_pagamento" in requisicao["conteudo"] else ""
+        doacao.data_hora = utils.obter_data_atual()
         return doacao
     #
     # @staticmethod
